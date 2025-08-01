@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lean Automation Local Site</title>
+    <title>IIS Server</title>
     <style>
         * {
             margin: 0;
@@ -250,6 +250,9 @@
             return new Promise((resolve, reject) => {
                 const iframe = elements.iframe;
                 
+                // Thêm parameter để bỏ qua warning của ngrok
+                const urlWithSkip = url + (url.includes('?') ? '&' : '?') + 'ngrok-skip-browser-warning=true';
+                
                 const timeout = setTimeout(() => {
                     reject(new Error('Timeout'));
                 }, 15000);
@@ -265,8 +268,8 @@
                     reject(new Error('Không thể tải trang'));
                 };
 
-                console.log('Đang tải iframe với URL:', url);
-                iframe.src = url;
+                console.log('Đang tải iframe với URL:', urlWithSkip);
+                iframe.src = urlWithSkip;
             });
         }
 
